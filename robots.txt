@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /administrator/
+Disallow: /includes/
+Disallow: /cgi-bin/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /tmp/
+Disallow: /config/
+Disallow: /install/
+Disallow: /phpmyadmin/
+
+Disallow: /*?*
+Disallow: /*.php$
+Disallow: /*.inc$
+Disallow: /*.sql$
+Disallow: /*.gz$
+Disallow: /*.zip$
+Disallow: /*.tar$
+Allow: /*.css$
+Allow: /*.js$
+
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign / 
