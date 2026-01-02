@@ -21,7 +21,3 @@ Disallow: /*.zip$
 Disallow: /*.tar$
 Allow: /*.css$
 Allow: /*.js$
-
-User-agent: Yandex
-Allow: /
-Clean-param: utm_source&utm_medium&utm_campaign / 
