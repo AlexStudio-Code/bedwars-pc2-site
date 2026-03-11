@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Кровати - BedWars Wiki</title>
-  <link rel="icon" href="favicon.svg">
+  <title>Геймплей - BedWars Wiki</title>
+  <link rel="icon" href="favicon1.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -175,13 +175,14 @@
       margin-bottom: 2rem;
     }
     
-    .list {
+    .steps {
       padding-left: 18px;
       margin: 1rem 0;
     }
     
-    .list li {
-      margin: 6px 0;
+    .steps li {
+      margin: 8px 0;
+      line-height: 1.6;
     }
     
     .note {
@@ -320,19 +321,19 @@
   <div class="layout">
     <!-- Боковая панель -->
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/">
         <img src="favicon.svg" alt="logo" width="28" height="28">
         <span>BedWars Wiki</span>
       </a>
       
       <nav class="nav">
-        <a class="nav-link" href="/">Главная</a>
-        <a class="nav-link" href="gameplay">Геймплей</a>
-        <a class="nav-link" href="generators">Генераторы</a>
-        <a class="nav-link active" href="beds">Кровати</a>
-        <a class="nav-link" href="shops">Магазины</a>
-        <a class="nav-link" href="maps">Карты</a>
-        <a class="nav-link" href="faq">FAQ</a>
+        <a class="nav-link" href="/bedwars">Главная</a>
+        <a class="nav-link active" href="/bedwars/gameplay">Геймплей</a>
+        <a class="nav-link" href="/bedwars/generators">Генераторы</a>
+        <a class="nav-link" href="/bedwars/beds">Кровати</a>
+        <a class="nav-link" href="/bedwars/shops">Магазины</a>
+        <a class="nav-link" href="/bedwars/maps">Карты</a>
+        <a class="nav-link" href="/bedwars/faq">FAQ</a>
       </nav>
       
       <div class="footer-note">
@@ -344,25 +345,26 @@
     <!-- Основной контент -->
     <main class="content">
       <header class="topbar">
-        <div class="topbar-title">Кровати</div>
+        <div class="topbar-title">Геймплей</div>
         <div class="actions">
           <a class="btn" href="https://pixelcombats.com/" target="_blank" rel="noopener">Pixel Combats 2</a>
-          <a class="btn" href="credits">Авторы</a>
+          <a class="btn" href="/credits">Авторы</a>
         </div>
       </header>
       
       <article class="page">
-        <h1>Кровати и разрушение</h1>
-        <p class="lead">Кровать — сердце вашей команды. Пока кровать цела, игроки возрождаются. После разрушения — смерть становится окончательной.</p>
-
-        <ul class="list">
-          <li>Ломать кровать можно только в фазе <strong>Игры</strong>.</li>
-          <li>Свою кровать разрушать нельзя.</li>
-          <li>Обычно требуется время удержания в зоне кровати для её разрушения.</li>
-        </ul>
-
+        <h1>Геймплей</h1>
+        <p class="lead">Матч делится на четыре состояния, управляемые серверной логикой:</p>
+        
+        <ol class="steps">
+          <li><strong>Ожидание игроков</strong> — спавн по командам, включены точки возрождения, магазин недоступен.</li>
+          <li><strong>Строительство</strong> — выдаётся набор блоков для защиты кровати, урон отключён.</li>
+          <li><strong>Игра</strong> — открываются генераторы, включается урон, можно ломать кровати.</li>
+          <li><strong>Завершение</strong> — победа/ничья, перезапуск через короткий таймер.</li>
+        </ol>
+        
         <div class="note">
-          Если кровать разрушена и все игроки команды одновременно мертвы или вышли — команда проиграла.
+          Подсказки интерфейса (hint/caption) помогают отслеживать активную фазу и цели.
         </div>
       </article>
     </main>

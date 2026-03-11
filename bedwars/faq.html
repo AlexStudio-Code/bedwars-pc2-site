@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Геймплей - BedWars Wiki</title>
-  <link rel="icon" href="favicon.svg">
+  <title>FAQ - BedWars Wiki</title>
+  <link rel="icon" href="favicon1.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -168,30 +168,25 @@
       margin-bottom: 1rem;
     }
     
-    .lead {
-      color: #cfe1ff;
-      opacity: .95;
-      font-size: 1.1em;
-      margin-bottom: 2rem;
+    .qa {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .02);
+      margin: 10px 0;
     }
     
-    .steps {
-      padding-left: 18px;
-      margin: 1rem 0;
+    .qa > summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding: 8px 0;
+      outline: none;
     }
     
-    .steps li {
-      margin: 8px 0;
-      line-height: 1.6;
-    }
-    
-    .note {
-      background: rgba(91, 156, 255, .05);
-      border: 1px solid rgba(91, 156, 255, .2);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-top: 20px;
-      font-size: 0.95em;
+    .qa > div {
+      padding: 12px 0 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 8px;
     }
     
     /* Гамбургер меню для мобильных */
@@ -321,19 +316,19 @@
   <div class="layout">
     <!-- Боковая панель -->
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="/">
+      <a class="brand" href="index.html">
         <img src="favicon.svg" alt="logo" width="28" height="28">
         <span>BedWars Wiki</span>
       </a>
       
       <nav class="nav">
-        <a class="nav-link" href="/">Главная</a>
-        <a class="nav-link active" href="gameplay">Геймплей</a>
-        <a class="nav-link" href="generators">Генераторы</a>
-        <a class="nav-link" href="beds">Кровати</a>
-        <a class="nav-link" href="shops">Магазины</a>
-        <a class="nav-link" href="maps">Карты</a>
-        <a class="nav-link" href="faq">FAQ</a>
+        <a class="nav-link" href="/bedwars">Главная</a>
+        <a class="nav-link" href="/bedwars/gameplay">Геймплей</a>
+        <a class="nav-link" href="/bedwars/generators">Генераторы</a>
+        <a class="nav-link" href="/bedwars/beds">Кровати</a>
+        <a class="nav-link" href="/bedwars/shops">Магазины</a>
+        <a class="nav-link" href="/bedwars/maps">Карты</a>
+        <a class="nav-link active" href="/bedwars/faq">FAQ</a>
       </nav>
       
       <div class="footer-note">
@@ -345,27 +340,30 @@
     <!-- Основной контент -->
     <main class="content">
       <header class="topbar">
-        <div class="topbar-title">Геймплей</div>
+        <div class="topbar-title">FAQ</div>
         <div class="actions">
           <a class="btn" href="https://pixelcombats.com/" target="_blank" rel="noopener">Pixel Combats 2</a>
-          <a class="btn" href="credits">Авторы</a>
+          <a class="btn" href="/credits">Авторы</a>
         </div>
       </header>
       
       <article class="page">
-        <h1>Геймплей</h1>
-        <p class="lead">Матч делится на четыре состояния, управляемые серверной логикой:</p>
+        <h1>FAQ</h1>
         
-        <ol class="steps">
-          <li><strong>Ожидание игроков</strong> — спавн по командам, включены точки возрождения, магазин недоступен.</li>
-          <li><strong>Строительство</strong> — выдаётся набор блоков для защиты кровати, урон отключён.</li>
-          <li><strong>Игра</strong> — открываются генераторы, включается урон, можно ломать кровати.</li>
-          <li><strong>Завершение</strong> — победа/ничья, перезапуск через короткий таймер.</li>
-        </ol>
+        <details class="qa">
+          <summary>Почему нельзя ломать кровати в начале?</summary>
+          <div>В фазах Ожидания/Строительства ломание отключено — это дизайн режима. Возможность появляется, когда игра переходит в фазу Игры.</div>
+        </details>
         
-        <div class="note">
-          Подсказки интерфейса (hint/caption) помогают отслеживать активную фазу и цели.
-        </div>
+        <details class="qa">
+          <summary>Игрок умер и не возрождается?</summary>
+          <div>Вероятно, кровать его команды была разрушена. После смерти без кровати — игрок выбывает до конца матча.</div>
+        </details>
+        
+        <details class="qa">
+          <summary>Как ускорить генерацию ресурсов?</summary>
+          <div>Ищите зоны апгрейда генераторов или контролируйте острова с ресурсами — конкретика зависит от карты.</div>
+        </details>
       </article>
     </main>
   </div>

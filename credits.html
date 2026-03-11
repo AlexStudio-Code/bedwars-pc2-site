@@ -1,395 +1,547 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Авторы - BedWars Wiki</title>
-  <link rel="icon" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Команда — AlexStudio Code / PC2 Division</title>
+  <link rel="icon" href="https://alexstudiocode.ru/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --bg: #0b0f14;
-      --bg-soft: #0f141b;
-      --panel: #121824;
-      --muted: #9aa5b1;
-      --text: #e6edf3;
-      --accent: #5b9cff;
-      --border: #1f2836;
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
-    
-    html, body {
-      height: 100%;
+
+    :root {
+      --bg: #0c0f15;
+      --bg-soft: #131823;
+      --card-bg: #1a212d;
+      --text: #ffffff;
+      --text-muted: #a0b3d9;
+      --accent: #5b8cff;
+      --accent-pink: #ff6b9d;
+      --border: #2a3442;
+      --radius: 28px;
     }
-    
+
     body {
-      background: linear-gradient(180deg, var(--bg) 0%, #0c1117 100%);
+      background: var(--bg);
       color: var(--text);
-      font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
       min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(91, 140, 255, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 90% 70%, rgba(255, 107, 157, 0.03) 0%, transparent 30%);
     }
-    
-    /* Основной макет */
-    .layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      min-height: 100vh;
-    }
-    
-    /* Боковая панель */
-    .sidebar {
-      background: var(--panel);
-      border-right: 1px solid var(--border);
-      padding: 20px;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: transform 0.3s ease;
-      z-index: 100;
-    }
-    
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: .3px;
-      font-size: 1.4rem;
-    }
-    
-    .brand img {
-      width: 32px;
-      height: 32px;
-    }
-    
-    .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    
-    .nav-link {
-      display: block;
-      padding: 10px 12px;
-      border-radius: 12px;
-      color: var(--text);
-      text-decoration: none;
-      border: 1px solid transparent;
-      transition: .15s ease;
-    }
-    
-    .nav-link:hover {
-      background: var(--bg-soft);
-      border-color: var(--border);
-    }
-    
-    .nav-link.active {
-      background: rgba(91, 156, 255, .12);
-      border-color: rgba(91, 156, 255, .35);
-      color: #d5e6ff;
-    }
-    
-    .footer-note {
-      margin-top: auto;
-      color: var(--muted);
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    /* Основной контент */
-    .content {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(18, 24, 36, .65);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-    
-    .topbar-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-left: 50px;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      color: var(--text);
-      text-decoration: none;
-      transition: .15s ease;
-      background: rgba(255, 255, 255, .05);
-    }
-    
-    .btn:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(91, 156, 255, .15);
-    }
-    
-    .page {
-      padding: 28px 28px 64px;
-      max-width: 980px;
-      flex: 1;
-    }
-    
-    h1 {
-      margin-top: 0;
-      color: var(--text);
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .lead {
-      color: #cfe1ff;
-      opacity: .95;
-      font-size: 1.1em;
-      margin-bottom: 2rem;
-    }
-    
-    /* Гамбургер меню для мобильных */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 10px 12px;
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      z-index: 101;
-      border-radius: 8px;
-      background: rgba(18, 24, 36, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      width: 45px;
-      height: 45px;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .mobile-menu-overlay {
-      display: none;
+
+    /* Навигация */
+    .navbar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 99;
+      right: 0;
+      z-index: 100;
+      background: rgba(12, 15, 21, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(42, 52, 66, 0.5);
+      padding: 1rem 2rem;
     }
-    
-    .mobile-menu-overlay.active {
-      display: block;
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    
-    /* Адаптивность */
-    @media (max-width: 900px) {
-      .layout {
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+      transform: rotate(5deg);
+      transition: transform 0.2s;
+    }
+
+    .logo:hover .logo-icon {
+      transform: rotate(0deg) scale(1.05);
+    }
+
+    .logo-text {
+      font-weight: 600;
+      color: white;
+      font-size: 1.3rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+    }
+
+    /* Основной контент */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+    }
+
+    /* Заголовок */
+    .page-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .page-header h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .accent-text {
+      background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Сетка команды */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-pink));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .team-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      position: relative;
+    }
+
+    .avatar.special {
+      background: linear-gradient(135deg, #ffd966, #ff9f4d);
+    }
+
+    .avatar-icon {
+      font-size: 3.5rem;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    }
+
+    .team-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .role {
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      background: rgba(91, 140, 255, 0.1);
+      border: 1px solid rgba(91, 140, 255, 0.2);
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .role.lead {
+      background: rgba(255, 215, 0, 0.1);
+      border-color: rgba(255, 215, 0, 0.2);
+      color: #ffd966;
+    }
+
+    .description {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Блок о студии */
+    .about-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin-top: 3rem;
+    }
+
+    .about-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Футер */
+    .footer {
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid var(--border);
+      padding: 4rem 2rem 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Мобилка */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .page-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .stats-grid {
         grid-template-columns: 1fr;
       }
-      
-      .mobile-menu-btn {
-        display: flex;
-      }
-      
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 280px;
-        height: 100vh;
-        z-index: 100;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
-      }
-      
-      .sidebar.active {
-        transform: translateX(0);
-      }
-      
-      .topbar {
-        position: relative;
-        padding-left: 70px;
-        min-height: 70px;
-      }
-      
-      .topbar-title {
-        margin-left: 0;
-        padding-left: 10px;
-      }
-      
-      .page {
-        padding: 22px 16px 48px;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
     }
-    
+
     @media (max-width: 480px) {
-      .topbar {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-        padding: 1rem 1rem 1rem 70px;
-        min-height: auto;
+      .main {
+        padding: 6rem 1rem 2rem;
       }
-      
-      .topbar-title {
-        padding-left: 0;
-        width: 100%;
+
+      .team-card {
+        padding: 1.5rem;
       }
-      
-      .topbar .actions {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        width: 100%;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      .page {
-        padding: 1rem;
+
+      .about-section {
+        padding: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Гамбургер меню (только для мобильных) -->
-  <button class="mobile-menu-btn" id="mobileMenuBtn">
-    <i class="fas fa-bars"></i>
-  </button>
-  
-  <!-- Оверлей для закрытия меню -->
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-  
-  <div class="layout">
-    <!-- Боковая панель -->
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="index.html">
-        <img src="favicon.svg" alt="logo" width="28" height="28">
-        <span>BedWars Wiki</span>
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="/" class="logo">
+        <img src="https://alexstudiocode.ru/logo.png" alt="AlexStudio Code Logo" style="width: 40px; height: 40px; border-radius: 12px;">
+        <div class="logo-text">Alex<span>Studio</span> Code</div>
       </a>
       
-      <nav class="nav">
-        <a class="nav-link" href="/">Главная</a>
-        <a class="nav-link" href="gameplay">Геймплей</a>
-        <a class="nav-link" href="generators">Генераторы</a>
-        <a class="nav-link" href="beds">Кровати</a>
-        <a class="nav-link" href="shops">Магазины</a>
-        <a class="nav-link" href="maps">Карты</a>
-        <a class="nav-link" href="faq">FAQ</a>
-      </nav>
-      
-      <div class="footer-note">
-        <div>© 2025 BedWars Wiki</div>
-        <div>AlexStudio Code</div>
-      </div>
-    </aside>
-    
-    <!-- Основной контент -->
-    <main class="content">
-      <header class="topbar">
-        <div class="topbar-title">Авторы</div>
-        <div class="actions">
-          <a class="btn" href="https://pixelcombats.com/" target="_blank" rel="noopener">Pixel Combats 2</a>
-          <a class="btn" href="credits">Авторы</a>
-        </div>
-      </header>
-      
-      <article class="page">
-        <h1>Авторы</h1>
-        <p class="lead">Режим BedWars для Pixel Combats 2 создан командой разработчиков <strong>AlexStudio Code при участии: БꝆɇйz|ᵖⱽʸ и Mr. Tip</strong>.</p>
-        <p>Эта мини-вики — неофициальное сообщество-руководство, оформленное в тёмной теме для удобного чтения.</p>
-      </article>
-    </main>
-  </div>
+      <ul class="nav-links">
+        <li><a href="/">Главная</a></li>
+        <li><a href="bedwars/">BedWars</a></li>
+        <li><a href="bombs/">Бомбы</a></li>
+        <li><a href="credits" class="active">Команда</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <script>
-    // Мобильное меню
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const sidebar = document.getElementById('sidebar');
-    
-    function toggleMobileMenu() {
-      sidebar.classList.toggle('active');
-      mobileMenuOverlay.classList.toggle('active');
+  <main class="main">
+    <div class="page-header">
+      <h1>
+        <span class="accent-text">Команда</span> разработки
+      </h1>
+      <p>Люди, создающие режимы для Pixel Combats 2</p>
+    </div>
+
+    <div class="team-grid">
+      <!-- Alex Studio -->
+      <div class="team-card">
+        <div class="avatar">
+          <i class="fas fa-crown avatar-icon"></i>
+        </div>
+        <h2>Alex Studio</h2>
+        <div class="role lead">Основатель / Ведущий разработчик</div>
+        <p class="description">
+          Основатель студии AlexStudio Code. 
+          Разработка режимов, сайтов, архитектура проектов.
+        </p>
+      </div>
+
+      <!-- БꝆɇйz|ᵖⱽʸ -->
+      <div class="team-card">
+        <div class="avatar special">
+          <i class="fas fa-skull avatar-icon"></i>
+        </div>
+        <h2>БꝆɇйz|ᵖⱽʸ</h2>
+        <div class="role">Соредактор / Тестировщик</div>
+        <p class="description">
+          Участник разработки BedWars. 
+          Помощь в создании контента и тестировании.
+        </p>
+      </div>
+
+      <!-- Mr. Tip -->
+      <div class="team-card">
+        <div class="avatar">
+          <i class="fas fa-lightbulb avatar-icon"></i>
+        </div>
+        <h2>Mr. Tip</h2>
+        <div class="role">Соредактор / Идейный вдохновитель</div>
+        <p class="description">
+          Участник разработки BedWars.
+          Генерация идей и помощь в реализации.
+        </p>
+      </div>
+    </div>
+
+    <!-- О студии -->
+    <div class="about-section">
+      <h2>О <span class="accent-text">подразделении</span></h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            <strong>AlexStudio Code / PC2 Division</strong> — специализированное подразделение 
+            студии AlexStudio Code, занимающееся разработкой игровых режимов для платформы Pixel Combats 2.
+          </p>
+          <p>
+            Мы создаём качественные, сбалансированные и интересные режимы, 
+            которые нравятся игрокам. В нашей команде каждый участник вносит 
+            свой вклад в развитие проектов.
+          </p>
+          <p>
+            Следите за новостями в нашем Telegram-канале!
+          </p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">2+</div>
+            <div class="stat-label">Активных режимов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Участника команды</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">WIP</div>
+            <div class="stat-label">Новые проекты</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>AlexStudio Code</h3>
+        <p style="color: var(--text-muted); line-height: 1.8;">
+          Отделение разработки режимов<br>
+          для Pixel Combats 2
+        </p>
+        <div class="social-links">
+          <a href="https://t.me/asc_pc2" target="_blank" class="social-link">
+            <i class="fab fa-telegram-plane"></i>
+          </a>
+        </div>
+      </div>
       
-      // Меняем иконку
-      if (sidebar.classList.contains('active')) {
-        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-        document.body.style.overflow = 'hidden';
-      } else {
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-        document.body.style.overflow = '';
-      }
-    }
+      <div class="footer-section">
+        <h3>Режимы</h3>
+        <ul class="footer-links">
+          <li><a href="bedwars/"><i class="fas fa-bed"></i> BedWars</a></li>
+          <li><a href="bombs/"><i class="fas fa-bomb"></i> Бомбы (WIP)</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Команда</h3>
+        <ul class="footer-links">
+          <li><a href="credits"><i class="fas fa-users"></i> Участники</a></li>
+          <li><a href="https://t.me/asc_pc2" target="_blank"><i class="fab fa-telegram"></i> @asc_pc2</a></li>
+        </ul>
+      </div>
+    </div>
     
-    function closeMobileMenu() {
-      sidebar.classList.remove('active');
-      mobileMenuOverlay.classList.remove('active');
-      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      document.body.style.overflow = '';
-    }
-    
-    // Обработчики событий
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-    
-    // Закрытие меню при клике на ссылку
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-    
-    // Закрытие по ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && sidebar.classList.contains('active')) {
-        closeMobileMenu();
-      }
-    });
-    
-    // Автоматическое закрытие при изменении размера окна
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900 && sidebar.classList.contains('active')) {
-        closeMobileMenu();
-      }
-    });
-  </script>
+    <div class="footer-bottom">
+      <p>© 2025 AlexStudio Code. Все права защищены.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Pixel Combats 2 — игровая платформа, все права принадлежат разработчикам игры.</p>
+    </div>
+  </footer>
 </body>
 </html>

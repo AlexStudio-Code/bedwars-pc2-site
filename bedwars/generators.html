@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FAQ - BedWars Wiki</title>
-  <link rel="icon" href="favicon.svg">
+  <title>Генераторы - BedWars Wiki</title>
+  <link rel="icon" href="favicon1.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -168,25 +168,28 @@
       margin-bottom: 1rem;
     }
     
-    .qa {
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    .lead {
+      color: #cfe1ff;
+      opacity: .95;
+      font-size: 1.1em;
+      margin-bottom: 2rem;
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 8px;
+      box-shadow: var(--shadow);
+    }
+    
+    .table th, .table td {
       padding: 10px 12px;
+      border: 1px solid var(--border);
       background: rgba(255, 255, 255, .02);
-      margin: 10px 0;
     }
     
-    .qa > summary {
-      cursor: pointer;
-      font-weight: 600;
-      padding: 8px 0;
-      outline: none;
-    }
-    
-    .qa > div {
-      padding: 12px 0 4px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 8px;
+    .table th {
+      background: rgba(255, 255, 255, .05);
     }
     
     /* Гамбургер меню для мобильных */
@@ -271,6 +274,10 @@
       h1 {
         font-size: 2rem;
       }
+      
+      .table {
+        font-size: 0.9rem;
+      }
     }
     
     @media (max-width: 480px) {
@@ -316,19 +323,19 @@
   <div class="layout">
     <!-- Боковая панель -->
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/">
         <img src="favicon.svg" alt="logo" width="28" height="28">
         <span>BedWars Wiki</span>
       </a>
       
       <nav class="nav">
-        <a class="nav-link" href="/">Главная</a>
-        <a class="nav-link" href="gameplay">Геймплей</a>
-        <a class="nav-link" href="generators">Генераторы</a>
-        <a class="nav-link" href="beds">Кровати</a>
-        <a class="nav-link" href="shops">Магазины</a>
-        <a class="nav-link" href="maps">Карты</a>
-        <a class="nav-link active" href="faq">FAQ</a>
+        <a class="nav-link" href="/bedwars">Главная</a>
+        <a class="nav-link" href="/bedwars/gameplay">Геймплей</a>
+        <a class="nav-link active" href="/bedwars/generators">Генераторы</a>
+        <a class="nav-link" href="/bedwars/beds">Кровати</a>
+        <a class="nav-link" href="/bedwars/shops">Магазины</a>
+        <a class="nav-link" href="/bedwars/maps">Карты</a>
+        <a class="nav-link" href="/bedwars/faq">FAQ</a>
       </nav>
       
       <div class="footer-note">
@@ -340,30 +347,29 @@
     <!-- Основной контент -->
     <main class="content">
       <header class="topbar">
-        <div class="topbar-title">FAQ</div>
+        <div class="topbar-title">Генераторы</div>
         <div class="actions">
           <a class="btn" href="https://pixelcombats.com/" target="_blank" rel="noopener">Pixel Combats 2</a>
-          <a class="btn" href="credits">Авторы</a>
+          <a class="btn" href="/credits">Авторы</a>
         </div>
       </header>
       
       <article class="page">
-        <h1>FAQ</h1>
+        <h1>Генераторы ресурсов</h1>
+        <p class="lead">Основные ресурсы: <strong>золото</strong>, <strong>алмазы</strong>, <strong>изумруды</strong>.</p>
         
-        <details class="qa">
-          <summary>Почему нельзя ломать кровати в начале?</summary>
-          <div>В фазах Ожидания/Строительства ломание отключено — это дизайн режима. Возможность появляется, когда игра переходит в фазу Игры.</div>
-        </details>
+        <table class="table">
+          <thead>
+            <tr><th>Ресурс</th><th>Где спавнится</th><th>Назначение</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Золото</td><td>База команды</td><td>Базовая броня и инструменты</td></tr>
+            <tr><td>Алмазы</td><td>Сторонние острова</td><td>Командные апгрейды и улучшения</td></tr>
+            <tr><td>Изумруды</td><td>Центр карты</td><td>Продвинутая экипировка</td></tr>
+          </tbody>
+        </table>
         
-        <details class="qa">
-          <summary>Игрок умер и не возрождается?</summary>
-          <div>Вероятно, кровать его команды была разрушена. После смерти без кровати — игрок выбывает до конца матча.</div>
-        </details>
-        
-        <details class="qa">
-          <summary>Как ускорить генерацию ресурсов?</summary>
-          <div>Ищите зоны апгрейда генераторов или контролируйте острова с ресурсами — конкретика зависит от карты.</div>
-        </details>
+        <p>Скорость генерации и лимиты могут улучшаться в специальных зонах апгрейдов или при выполнении условий карты.</p>
       </article>
     </main>
   </div>
