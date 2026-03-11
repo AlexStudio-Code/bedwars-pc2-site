@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Карты - BedWars Wiki</title>
+  <link rel="icon" href="favicon1.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #0f141b;
+      --panel: #121824;
+      --muted: #9aa5b1;
+      --text: #e6edf3;
+      --accent: #5b9cff;
+      --border: #1f2836;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+    }
+    
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, #0c1117 100%);
+      color: var(--text);
+      font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+    
+    /* Основной макет */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    
+    /* Боковая панель */
+    .sidebar {
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .3px;
+      font-size: 1.4rem;
+    }
+    
+    .brand img {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    
+    .nav-link {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: .15s ease;
+    }
+    
+    .nav-link:hover {
+      background: var(--bg-soft);
+      border-color: var(--border);
+    }
+    
+    .nav-link.active {
+      background: rgba(91, 156, 255, .12);
+      border-color: rgba(91, 156, 255, .35);
+      color: #d5e6ff;
+    }
+    
+    .footer-note {
+      margin-top: auto;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    /* Основной контент */
+    .content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(18, 24, 36, .65);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    
+    .topbar-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-left: 50px;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      transition: .15s ease;
+      background: rgba(255, 255, 255, .05);
+    }
+    
+    .btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91, 156, 255, .15);
+    }
+    
+    .page {
+      padding: 28px 28px 64px;
+      max-width: 980px;
+      flex: 1;
+    }
+    
+    h1 {
+      margin-top: 0;
+      color: var(--text);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .lead {
+      color: #cfe1ff;
+      opacity: .95;
+      font-size: 1.1em;
+      margin-bottom: 2rem;
+    }
+    
+    .list {
+      padding-left: 18px;
+      margin: 1rem 0;
+    }
+    
+    .list li {
+      margin: 6px 0;
+      line-height: 1.6;
+    }
+    
+    /* Гамбургер меню для мобильных */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 10px 12px;
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 101;
+      border-radius: 8px;
+      background: rgba(18, 24, 36, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      width: 45px;
+      height: 45px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 99;
+    }
+    
+    .mobile-menu-overlay.active {
+      display: block;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+      }
+      
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .topbar {
+        position: relative;
+        padding-left: 70px;
+        min-height: 70px;
+      }
+      
+      .topbar-title {
+        margin-left: 0;
+        padding-left: 10px;
+      }
+      
+      .page {
+        padding: 22px 16px 48px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .topbar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+        padding: 1rem 1rem 1rem 70px;
+        min-height: auto;
+      }
+      
+      .topbar-title {
+        padding-left: 0;
+        width: 100%;
+      }
+      
+      .topbar .actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .page {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Гамбургер меню (только для мобильных) -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Оверлей для закрытия меню -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  
+  <div class="layout">
+    <!-- Боковая панель -->
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/">
+        <img src="favicon.svg" alt="logo" width="28" height="28">
+        <span>BedWars Wiki</span>
+      </a>
+      
+      <nav class="nav">
+        <a class="nav-link" href="/bedwars">Главная</a>
+        <a class="nav-link" href="/bedwars/gameplay">Геймплей</a>
+        <a class="nav-link" href="/bedwars/generators">Генераторы</a>
+        <a class="nav-link" href="/bedwars/beds">Кровати</a>
+        <a class="nav-link" href="/bedwars/shops">Магазины</a>
+        <a class="nav-link active" href="/bedwars/maps">Карты</a>
+        <a class="nav-link" href="/bedwars/faq">FAQ</a>
+      </nav>
+      
+      <div class="footer-note">
+        <div>© 2025 BedWars Wiki</div>
+        <div>AlexStudio Code</div>
+      </div>
+    </aside>
+    
+    <!-- Основной контент -->
+    <main class="content">
+      <header class="topbar">
+        <div class="topbar-title">Карты</div>
+        <div class="actions">
+          <a class="btn" href="https://pixelcombats.com/" target="_blank" rel="noopener">Pixel Combats 2</a>
+          <a class="btn" href="credits">Авторы</a>
+        </div>
+      </header>
+      
+      <article class="page">
+        <h1>Карты и зоны</h1>
+        <p class="lead">Типичные зоны: базы команд, центральный остров, острова с алмазами, зоны магазинов, барьерные области старта.</p>
+        
+        <ul class="list">
+          <li><strong>База команды</strong> — спавн, генератор золота, кровать.</li>
+          <li><strong>Центр</strong> — изумруды и активные бои.</li>
+          <li><strong>Алмазные острова</strong> — контроль даёт апгрейды.</li>
+          <li><strong>Барьер</strong> — временно ограничивает движение до старта фазы игры.</li>
+        </ul>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    // Мобильное меню
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const sidebar = document.getElementById('sidebar');
+    
+    function toggleMobileMenu() {
+      sidebar.classList.toggle('active');
+      mobileMenuOverlay.classList.toggle('active');
+      
+      // Меняем иконку
+      if (sidebar.classList.contains('active')) {
+        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = '';
+      }
+    }
+    
+    function closeMobileMenu() {
+      sidebar.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      document.body.style.overflow = '';
+    }
+    
+    // Обработчики событий
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Закрытие по ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+    
+    // Автоматическое закрытие при изменении размера окна
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && sidebar.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>
