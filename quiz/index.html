@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>PC2 Division | Опрос сообщества Pixel Combats 2</title>
   <link rel="icon" href="https://alexstudiocode.ru/logo.png" type="image/x-icon">
+  
+  <!-- Open Graph / SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pc2-division.alexstudiocode.ru/quiz/">
+  <meta property="og:title" content="Опрос РС2 — Определи свой ранг в Pixel Combats 2">
+  <meta property="og:description" content="Пройди опрос из 34 вопросов и узнай, кто ты: от Хуесоса до God Emperor. Честный результат на основе твоего стиля игры!">
+  <meta property="og:image" content="https://pc2-division.alexstudiocode.ru/og-quiz.png">
+  <meta property="og:site_name" content="AlexStudio Code PC2 Division">
+  <meta property="og:locale" content="ru_RU">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Опрос РС2 — Определи свой ранг в Pixel Combats 2">
+  <meta name="twitter:description" content="Пройди опрос из 34 вопросов и узнай свой ранг в Pixel Combats 2!">
+  <meta name="twitter:image" content="https://pc2-division.alexstudiocode.ru/og-quiz.png">
+  
+  <meta name="description" content="Опрос для игроков Pixel Combats 2. Ответь на 34 вопроса и узнай свой игровой ранг — от Хуесоса до God Emperor!">
+  
+  <title>Опрос РС2 — Определи свой ранг | PC2 Division</title>
+  
   <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -542,7 +560,7 @@
 
 <nav class="navbar">
   <div class="nav-content">
-    <a href="#" class="logo">
+    <a href="/" class="logo">
       <img src="https://alexstudiocode.ru/logo.png" alt="AlexStudio Code Logo" onerror="this.src='https://via.placeholder.com/40?text=PC2'">
       <div class="logo-text">Alex<span>Studio</span> Code</div>
     </a>
@@ -601,23 +619,23 @@
     <div class="footer-section">
       <h3>Режимы</h3>
       <ul class="footer-links">
-        <li><a href="#"><i class="fas fa-bed"></i> BedWars</a></li>
-        <li><a href="#"><i class="fas fa-bomb"></i> Закладка бомбы</a></li>
+        <li><a href="/bedwars/"><i class="fas fa-bed"></i> BedWars</a></li>
+        <li><a href="/bombs/"><i class="fas fa-bomb"></i> Закладка бомбы</a></li>
       </ul>
     </div>
 
     <div class="footer-section">
       <h3>Другие проекты</h3>
       <ul class="footer-links">
-        <li><a href="#" id="surveyFooterLink"><i class="fas fa-poll"></i> Опрос РС2</a></li>
-        <li><a href="/pc2-booster" id="acceleratorFooterLink"><i class="fas fa-rocket"></i> Ускоритель PC2</a></li>
+        <li><a href="/quiz/" id="surveyFooterLink"><i class="fas fa-poll"></i> Опрос РС2</a></li>
+        <li><a href="/pc2-booster"><i class="fas fa-rocket"></i> Ускоритель PC2</a></li>
       </ul>
     </div>
     
     <div class="footer-section">
       <h3>Информация</h3>
       <ul class="footer-links">
-        <li><a href="#"><i class="fas fa-users"></i> Команда</a></li>
+        <li><a href="/credits"><i class="fas fa-users"></i> Команда</a></li>
         <li><a href="https://t.me/asc_pc2" target="_blank"><i class="fab fa-telegram"></i> @asc_pc2</a></li>
       </ul>
     </div>
@@ -723,7 +741,6 @@
     });
     currentNumSpan.innerText = currentIdx + 1;
     prevBtn.disabled = (currentIdx === 0);
-    // Заменяем смайлик на красивую иконку на кнопке завершения
     if (currentIdx === questionsData.length - 1) {
       nextBtn.innerHTML = '<i class="fas fa-check-circle"></i> Завершить';
     } else {
