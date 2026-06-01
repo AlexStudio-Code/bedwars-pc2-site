@@ -407,7 +407,7 @@
       color: var(--accent-blue);
     }
 
-    /* Футер */
+    /* Футер с вкладкой "Другие проекты" */
     .footer {
       background: rgba(0, 0, 0, 0.2);
       border-top: 1px solid var(--border);
@@ -419,7 +419,7 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 3rem;
     }
 
@@ -519,6 +519,19 @@
       .teams-showcase {
         grid-template-columns: 1fr;
       }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-links a {
+        justify-content: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -526,7 +539,7 @@
   <nav class="navbar">
     <div class="nav-content">
       <a href="/" class="logo">
-         <img src="https://pc2-division.alexstudiocode.ru/bombs/favicon2.png" alt="Bombs" width="32" height="32">
+        <img src="https://pc2-division.alexstudiocode.ru/bombs/favicon2.png" alt="Bombs" width="32" height="32">
         <div class="logo-text">Alex<span>Studio</span> Code</div>
       </a>
       
@@ -690,6 +703,7 @@
     </div>
   </main>
 
+  <!-- ОБНОВЛЁННЫЙ ФУТЕР с вкладкой "Другие проекты" -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-section">
@@ -712,6 +726,15 @@
           <li><a href="/bombs/"><i class="fas fa-bomb"></i> Закладка бомбы</a></li>
         </ul>
       </div>
+
+      <!-- НОВАЯ ВКЛАДКА: Другие проекты -->
+      <div class="footer-section">
+        <h3>Другие проекты</h3>
+        <ul class="footer-links">
+          <li><a href="/quiz/"><i class="fas fa-poll"></i> Опрос РС2</a></li>
+          <li><a href="/pc2-booster"><i class="fas fa-rocket"></i> Ускоритель PC2</a></li>
+        </ul>
+      </div>
       
       <div class="footer-section">
         <h3>Информация</h3>
@@ -728,7 +751,4 @@
     </div>
   </footer>
 </body>
-
 </html>
-
-
