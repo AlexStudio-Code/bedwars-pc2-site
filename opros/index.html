@@ -588,7 +588,7 @@
   </div>
 </div>
 
-<!-- ФУТЕР с вкладкой "Отдельные проекты" (слово "текущий" убрано) -->
+<!-- ФУТЕР с вкладкой "Отдельные проекты" (ссылка на ускоритель ведёт на /pc2-booster) -->
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-section">
@@ -616,7 +616,7 @@
       <h3>Отдельные проекты</h3>
       <ul class="footer-links">
         <li><a href="#" id="surveyFooterLink"><i class="fas fa-poll"></i> Опрос РС2</a></li>
-        <li><a href="#" id="acceleratorFooterLink"><i class="fas fa-rocket"></i> Ускоритель PC2</a></li>
+        <li><a href="/pc2-booster" id="acceleratorFooterLink"><i class="fas fa-rocket"></i> Ускоритель PC2</a></li>
       </ul>
     </div>
     
@@ -745,7 +745,7 @@
       <div class="result-container">
         <div class="result-img"><img src="image.png" alt="ранг"></div>
         <div class="rank-name">${rank.name}</div>
-        <div class="final-score-badge">🏆 набрано баллов: ${totalScore} (${rank.range})</div>
+        <div class="final-score-badge"><i class="fas fa-trophy"></i> набрано баллов: ${totalScore} (${rank.range})</div>
         <p style="margin-top:1.2rem; font-size:0.8rem;">Спасибо за прохождение опроса PC2!</p>
         <button id="restartQuizBtn" class="btn btn-primary restart-icon-btn"><i class="fas fa-arrows-rotate"></i> Пройти заново</button>
       </div>`;
@@ -774,21 +774,12 @@
     });
   }
 
-  // Обработчики для ссылок в футере
+  // Обработчик для ссылки на опрос в футере (прокрутка к началу)
   const surveyFooterLink = document.getElementById('surveyFooterLink');
-  const acceleratorFooterLink = document.getElementById('acceleratorFooterLink');
-  
   if (surveyFooterLink) {
     surveyFooterLink.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-  
-  if (acceleratorFooterLink) {
-    acceleratorFooterLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('🚀 Ускоритель PC2 — в разработке. Скоро здесь появится инструмент для оптимизации и ускорения игры!');
     });
   }
 
