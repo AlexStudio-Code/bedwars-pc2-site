@@ -73,7 +73,6 @@
       animation: slowMove 8s ease-in-out infinite alternate;
     }
 
-    /* navbar — только логотип и кнопка "На главную" */
     .navbar {
       background: rgba(5, 5, 5, 0.8);
       backdrop-filter: blur(20px);
@@ -176,7 +175,6 @@
       border-radius: 10px;
     }
 
-    /* Контейнер опроса */
     .main-container {
       max-width: 880px;
       margin: 6rem auto 2rem;
@@ -247,7 +245,6 @@
       font-weight: 500;
     }
 
-    /* Блок с баллами скрыт во время опроса */
     .score-total {
       display: none;
     }
@@ -398,14 +395,12 @@
       margin-top: 6px;
     }
 
-    /* Кнопка с иконкой вместо эмодзи */
     .restart-icon-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
     }
 
-    /* FOOTER — расширенный (вкладка "Другие проекты") */
     .footer {
       background: rgba(5, 5, 5, 0.8);
       backdrop-filter: blur(10px);
@@ -544,7 +539,6 @@
 <div class="bg"></div>
 <div class="gradient-bg"></div>
 
-<!-- Навигация: только логотип и кнопка "На главную" -->
 <nav class="navbar">
   <div class="nav-content">
     <a href="#" class="logo">
@@ -588,7 +582,6 @@
   </div>
 </div>
 
-<!-- ФУТЕР с вкладкой "Другие проекты" (ссылка на ускоритель ведёт на /pc2-booster) -->
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-section">
@@ -636,7 +629,6 @@
 </footer>
 
 <script>
-  // ---- ВОПРОСЫ (баллы скрыты, используются только для подсчёта в финале) ----
   const questionsData = [
     { text: "1. Как давно ты играешь в игру?", opts: ["А) 2 месяца", "Б) 6 месяцев", "В) 1 год", "Г) Более 3 лет", "Д) Более 5 лет"], points: [0,1,2,3,4] },
     { text: "2. Какой у тебя игровой уровень?", opts: ["А) 0–20", "Б) 20–45", "В) 45–60", "Г) 60–74", "Д) 74+"], points: [0,1,2,3,4] },
@@ -656,7 +648,7 @@
     { text: "16. Относишься или относился к кланам по типу Спикермены, Астро, СДВГ, Монолит, Лямбда?", opts: ["А) Да", "Б) Нет"], points: [-10,1] },
     { text: "17. Подписан ли ты на ВК/ТГ Pixel Combat?", opts: ["А) Да", "Б) Нет"], points: [1,0] },
     { text: "18. Следил ли ты или следишь за роликами по РС2?", opts: ["А) Слежу за всеми новыми", "Б) Слежу за несколькими каналами", "В) Раньше следил, сейчас нет", "Г) Не интересуюсь"], points: [3,2,1,0] },
-    { text: "19. Интересуешься ли событиями в PC2?", opts: ["А) Слежу за новостями", "Б) Слежу только за аналитиками", "В) Слежу за офиц. каналами", "Г) Не слежу"], points: [2,1,1,0] },
+    { text: "19. Интересуешься ли событиями в RS2?", opts: ["А) Слежу за новостями", "Б) Слежу только за аналитиками", "В) Слежу за офиц. каналами", "Г) Не слежу"], points: [2,1,1,0] },
     { text: "20. Был ли ты в группе тестеров?", opts: ["А) Да", "Б) Нет"], points: [3,0] },
     { text: "21. Какой у тебя уровень тестера?", opts: ["А) 0", "Б) 1", "В) 3", "Г) 5", "Д) 8+"], points: [0,1,2,3,4] },
     { text: "22. Являешься ли ты киберспортсменом в РС2?", opts: ["А) Да, активно", "Б) Раньше играл", "В) Не интересуюсь"], points: [1,2,2] },
@@ -684,7 +676,6 @@
   const resultBlockDiv = document.getElementById('resultBlock');
   totalLenSpan.innerText = questionsData.length;
 
-  // Функция подсчёта баллов (используется только для финального результата)
   function computeScore() {
     let total = 0;
     for (let i = 0; i < questionsData.length; i++) {
@@ -694,7 +685,6 @@
     return total;
   }
 
-  // Функция определения ранга с правильными ссылками (без двойного https)
   function getRankInfo(score) {
     if (score <= 0) return { name: "Хуесос", range: "≤ 0", img: "https://pc2-division.alexstudiocode.ru/images/huesos.png" };
     if (score <= 7) return { name: "Говноед", range: "1–7", img: "https://pc2-division.alexstudiocode.ru/images/govnoed.png" };
@@ -732,7 +722,12 @@
     });
     currentNumSpan.innerText = currentIdx + 1;
     prevBtn.disabled = (currentIdx === 0);
-    nextBtn.innerText = (currentIdx === questionsData.length - 1) ? 'Завершить ✅' : 'Далее →';
+    // Заменяем смайлик на красивую иконку на кнопке завершения
+    if (currentIdx === questionsData.length - 1) {
+      nextBtn.innerHTML = '<i class="fas fa-check-circle"></i> Завершить';
+    } else {
+      nextBtn.innerHTML = 'Далее →';
+    }
   }
 
   function finishQuiz() {
@@ -760,7 +755,6 @@
   function handleNext() { if (answers[currentIdx] === -1) { alert('Пожалуйста, выберите вариант'); return; } if (currentIdx + 1 < questionsData.length) { currentIdx++; renderCurrentQuestion(); window.scrollTo({ top: 200, behavior: 'smooth' }); } else { finishQuiz(); } }
   function handlePrev() { if (currentIdx > 0) { currentIdx--; renderCurrentQuestion(); window.scrollTo({ top: 200, behavior: 'smooth' }); } }
 
-  // Мобильное меню
   const menuBtn = document.getElementById('menuBtn');
   const navLinks = document.getElementById('navLinks');
   if (menuBtn) {
@@ -775,7 +769,6 @@
     });
   }
 
-  // Обработчик для ссылки на опрос в футере (прокрутка к началу)
   const surveyFooterLink = document.getElementById('surveyFooterLink');
   if (surveyFooterLink) {
     surveyFooterLink.addEventListener('click', (e) => {
